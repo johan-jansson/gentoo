@@ -62,7 +62,7 @@ nano -w /etc/conf.d/keymaps
 emerge sys-kernel/gentoo-sources
 emerge sys-kernel/linux-firmware
 emerge app-arch/lz4
-!!cp .config /usr/src/linux/.config
+!!cp config /usr/src/linux/.config
 cd /usr/src/linux
 make oldconfig
 make && make install
@@ -125,5 +125,11 @@ sudo rc-service elogind start
 sudo rc-service dbus start
 sudo emerge xorg-server xorg-drivers xrandr
 sudo emerge dwm st dmenu
-emerge -auqvDN @world
-sudo dispatch-conf
+mkdir ~/scripts/
+!!cp startdwm ~/scripts/
+chmod +x ~/scripts/startdwm
+!!cp xinitrc ~/.xinitrc
+startx
+
+#emerge -auqvDN @world
+#sudo dispatch-conf
