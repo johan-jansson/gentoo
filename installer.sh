@@ -125,9 +125,11 @@ sudo rc-update add elogind boot
 sudo rc-update add elogind default
 sudo rc-service elogind start
 sudo emerge xorg-server xorg-drivers xrandr
+sudo emerge setxkbmap
 sudo emerge dwm st dmenu
 mkdir ~/scripts/
 !!cp startdwm ~/scripts/
 chmod +x ~/scripts/startdwm
 !!cp xinitrc ~/.xinitrc
 startx
+
