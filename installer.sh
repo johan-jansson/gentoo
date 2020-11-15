@@ -118,11 +118,11 @@ updatedb
 sudo emerge openssh
 rc-update add sshd default
 rc-service sshd start
+emerge -auqvDN @world
 sudo emerge sys-apps/dbus elogind
 sudo rc-update add dbus default
 sudo rc-update add elogind boot
 sudo rc-service elogind start
-sudo rc-service dbus start
 sudo emerge xorg-server xorg-drivers xrandr
 sudo emerge dwm st dmenu
 mkdir ~/scripts/
@@ -130,6 +130,3 @@ mkdir ~/scripts/
 chmod +x ~/scripts/startdwm
 !!cp xinitrc ~/.xinitrc
 startx
-
-#emerge -auqvDN @world
-#sudo dispatch-conf
