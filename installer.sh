@@ -99,12 +99,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # POST-INSTALL
 emerge --depclean
 rm -f /stage3*
-emerge sudo 
-nano /etc/sudoers
+emerge doas 
+nano /etc/doas.conf
+permit :wheel
 useradd -m -G users,wheel,audio,video,input johan
 passwd johan
-sudo su johan
-sudo whoami
+doas su johan
+doas whoami
 passwd -d root
 exit
 cd
@@ -113,20 +114,15 @@ umount -R /mnt/gentoo
 reboot
 
 # POST-POST-INSTALL
-sudo emerge mlocate
-updatedb
-sudo emerge openssh
-rc-update add sshd default
-rc-service sshd start
-emerge -uDN @world
+emerge -uDN @world                    # necessary here?
 sudo emerge sys-apps/dbus elogind
 sudo rc-update add dbus default
 sudo rc-update add elogind boot
 sudo rc-update add elogind default
 sudo rc-service elogind start
-sudo emerge xorg-server xorg-drivers xrandr
-sudo emerge setxkbmap
+sudo emerge xorg-server xorg-drivers xrandr setxkbmap
 sudo emerge dwm st dmenu
+
 mkdir ~/scripts/
 !!cp startdwm ~/scripts/
 chmod +x ~/scripts/startdwm
