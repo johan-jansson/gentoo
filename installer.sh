@@ -23,6 +23,8 @@ quit
 mkfs.ext4 /dev/nvme0n1p2
 mkfs.vfat /dev/nvme0n1p1
 mount /dev/nvme0n1p2 /mnt/gentoo
+doas dd if=/dev/zero of=/mnt/gentoo/swap bs=1024 count=1048576
+mkswap /mnt/gentoo/swap
 
 # GET STAGE 3
 cd /mnt/gentoo
@@ -86,9 +88,11 @@ rc-update add cronie default
 
 # PARTITION TABLE
 !!cp fstab /etc/fstab
+swapon -a
 # <device>          <dir>   <fs>    <options>           <dump>  <fsck>
 # /dev/nvme0n1p1    /boot   vfat    defaults,noatime    0       2
 # /dev/nvme0n1p2    /       ext4    noatime,discard     0       1
+# /swap             none    swap    sw,loop             0       0
 
 # GRUB
 emerge sys-boot/grub:2
