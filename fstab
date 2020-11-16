@@ -14,7 +14,7 @@
 # <fs>			<mountpoint>	<type>		<opts>		<dump/pass>
 /dev/nvme0n1p1		/boot		vfat		defaults,noatime	0 2
 /dev/nvme0n1p2		/		ext4		noatime,discard		0 1
-
+/swap             none    swap    sw,loop       0 0
 # NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
 #
 # NOTE: Even though we list ext4 as the type here, it will work with ext2/ext3
