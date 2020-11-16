@@ -118,7 +118,7 @@ updatedb
 sudo emerge openssh
 rc-update add sshd default
 rc-service sshd start
-emerge -auqvDN @world
+emerge -uDN @world
 sudo emerge sys-apps/dbus elogind
 sudo rc-update add dbus default
 sudo rc-update add elogind boot
