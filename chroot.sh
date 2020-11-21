@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gentoo installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
+# Gentoo automatic installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
 # Based on https://wiki.gentoo.org/wiki/Handbook:AMD64
 # Boot: install-amd64-minimal-*.iso
 # wget https://github.com/johan-jansson/gentoo/archive/main.zip
@@ -16,19 +16,18 @@ emerge --sync
 emerge -uqvDN @world
 echo "Europe/Stockholm" > /etc/timezone
 emerge --config sys-libs/timezone-data
-nano -w /etc/conf.d/hwclock # clock="local"
+sed -i 's/clock="UTC"/clock="local"/' /etc/conf.d/hwclock
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 eselect locale set 4
-. /etc/profile
+source /etc/profile
 env-update
-export PS1="chroot $PS1"
-nano -w /etc/conf.d/keymaps
+sed -i 's/keymap="us"/keymap="sv-latin1"/' /etc/conf.d/keymaps
 
 # BUILD LINUX KERNEL
-emerge sys-kernel/gentoo-sources
-emerge sys-kernel/linux-firmware
-emerge app-arch/lz4
+emerge -qv sys-kernel/gentoo-sources
+emerge -qv sys-kernel/linux-firmware
+emerge -qv app-arch/lz4
 !!cp config /usr/src/linux/.config
 cd /usr/src/linux
 make oldconfig
@@ -38,7 +37,7 @@ make && make install
 echo "hostname=\"mercury\"" > /etc/conf.d/hostname
 echo "dns_domain_lo=\"lind\"" > /etc/conf.d/net
 echo "config_enp0s3=\"dhcp\"" >> /etc/conf.d/net
-emerge --noreplace net-misc/netifrc
+emerge -qv --noreplace net-misc/netifrc
 cd /etc/init.d
 ln -s net.lo net.enp0s3 
 rc-update add net.enp0s3 default
