@@ -41,6 +41,7 @@ mount --make-rslave /mnt/gentoo/dev
 cp /root/gentoo-main/chroot.sh /mnt/gentoo/root/
 cp /root/gentoo-main/config /mnt/gentoo/root/
 cp /root/gentoo-main/fstab /mnt/gentoo/root/
+chmod +x /mnt/gentoo/root/chroot.sh
 chroot /mnt/gentoo /bin/bash /mnt/gentoo/root/./chroot.sh
 
 reboot
