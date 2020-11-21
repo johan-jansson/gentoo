@@ -13,7 +13,7 @@
 
 source /etc/profile
 emerge --sync
-emerge -uqvDN @world
+emerge -uDN @world
 echo "Europe/Stockholm" > /etc/timezone
 emerge --config sys-libs/timezone-data
 sed -i 's/clock="UTC"/clock="local"/' /etc/conf.d/hwclock
@@ -23,28 +23,27 @@ eselect locale set 4
 source /etc/profile
 env-update
 sed -i 's/keymap="us"/keymap="sv-latin1"/' /etc/conf.d/keymaps
-emerge -qv sys-kernel/gentoo-sources sys-kernel/linux-firmware app-arch/lz4
+emerge sys-kernel/gentoo-sources sys-kernel/linux-firmware app-arch/lz4
 mv /root/config /usr/src/linux/.config
 cd /usr/src/linux
 make && make install
 echo "hostname=\"mercury\"" > /etc/conf.d/hostname
 echo "dns_domain_lo=\"lind\"" > /etc/conf.d/net
 echo "config_enp0s3=\"dhcp\"" >> /etc/conf.d/net
-emerge -qv --noreplace net-misc/netifrc
+emerge --noreplace net-misc/netifrc
 ln -s /etc/init.d/net.lo /etc/init.d/net.enp0s3 
 rc-update add net.enp0s3 default
 echo "127.0.0.1 mercury.lind mercury localhost" > /etc/hosts
-emerge -qv net-misc/dhcpcd
-emerge -qv app-admin/sysklogd
+emerge net-misc/dhcpcd
+emerge app-admin/sysklogd
 rc-update add sysklogd default
-emerge -qv sys-process/cronie
+emerge sys-process/cronie
 rc-update add cronie default
 mv /root/fstab /etc/fstab
-
-# GRUB
-emerge -qv sys-boot/grub:2
+emerge sys-boot/grub:2
 grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
+
 !! cp grub /etc/default/grub
 
 # POST-INSTALL
