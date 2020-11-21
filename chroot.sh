@@ -25,10 +25,8 @@ env-update
 sed -i 's/keymap="us"/keymap="sv-latin1"/' /etc/conf.d/keymaps
 
 # BUILD LINUX KERNEL
-emerge -qv sys-kernel/gentoo-sources
-emerge -qv sys-kernel/linux-firmware
-emerge -qv app-arch/lz4
-!!cp config /usr/src/linux/.config
+emerge -qv sys-kernel/gentoo-sources sys-kernel/linux-firmware app-arch/lz4
+cp /root/.config /usr/src/linux/config
 cd /usr/src/linux
 make oldconfig
 make && make install
