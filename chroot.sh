@@ -44,22 +44,13 @@ grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
 sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
-
-# POST-INSTALL
-rm -f /stage3*
+rm /stage3*
 emerge doas
-nano /etc/doas.conf
-permit :wheel
+echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
 passwd johan
-doas su johan
-doas whoami
 passwd -d root
 exit
-cd
-umount -l /mnt/gentoo/dev{/shm,/pts,}
-umount -R /mnt/gentoo
-reboot
 
 # POST-POST-INSTALL
 emerge -uDN @world                    # necessary here?
