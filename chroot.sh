@@ -24,7 +24,7 @@ source /etc/profile
 env-update
 sed -i 's/keymap="us"/keymap="sv-latin1"/' /etc/conf.d/keymaps
 emerge -qv sys-kernel/gentoo-sources sys-kernel/linux-firmware app-arch/lz4
-cp /root/config /usr/src/linux/.config
+mv /root/config /usr/src/linux/.config
 cd /usr/src/linux
 make && make install
 echo "hostname=\"mercury\"" > /etc/conf.d/hostname
@@ -39,17 +39,10 @@ emerge -qv app-admin/sysklogd
 rc-update add sysklogd default
 emerge -qv sys-process/cronie
 rc-update add cronie default
-
-# PARTITION TABLE
-!!cp fstab /etc/fstab
-swapon -a
-# <device>          <dir>   <fs>    <options>           <dump>  <fsck>
-# /dev/nvme0n1p1    /boot   vfat    defaults,noatime    0       2
-# /dev/nvme0n1p2    /       ext4    noatime,discard     0       1
-# /swap             none    swap    sw,loop             0       0
+mv /root/fstab /etc/fstab
 
 # GRUB
-emerge sys-boot/grub:2
+emerge -qv sys-boot/grub:2
 grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
 !! cp grub /etc/default/grub
