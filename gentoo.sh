@@ -22,7 +22,7 @@ mkfs.ext4 /dev/nvme0n1p2
 mount /dev/nvme0n1p2 /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/boot
-dd if=/dev/zero of=/mnt/gentoo/swap bs=1024 count=1048576
+dd if=/dev/zero of=/mnt/gentoo/swap bs=1024 count=33554432 # 32 gb swap
 chmod 0600 /mnt/gentoo/swap
 mkswap /mnt/gentoo/swap
 cd /mnt/gentoo
