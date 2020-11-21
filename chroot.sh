@@ -7,7 +7,7 @@
 # gentoo.sh        # main script
 # chroot.sh        # chroot operations
 # make.conf        # portage config: /etc/portage/make.conf
-# .config          # kernel config: /usr/src/linux/.config
+# config           # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
 
 source /etc/profile
@@ -42,13 +42,12 @@ mv /root/fstab /etc/fstab
 emerge sys-boot/grub:2
 grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-
-!! cp grub /etc/default/grub
+sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
+sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
 # POST-INSTALL
-emerge --depclean
 rm -f /stage3*
-emerge doas 
+emerge doas
 nano /etc/doas.conf
 permit :wheel
 useradd -m -G users,wheel,audio,video,input johan
