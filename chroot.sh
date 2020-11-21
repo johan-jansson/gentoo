@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gentoo automatic installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
+# Gentoo installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
 # Based on https://wiki.gentoo.org/wiki/Handbook:AMD64
 # Boot: install-amd64-minimal-*.iso
 # wget https://github.com/johan-jansson/gentoo/archive/main.zip
@@ -9,6 +9,7 @@
 # make.conf        # portage config: /etc/portage/make.conf
 # config           # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
+# post.sh          # post-installation script
 
 source /etc/profile
 emerge --sync
@@ -50,4 +51,5 @@ echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
 passwd johan
 passwd -d root
+
 exit
