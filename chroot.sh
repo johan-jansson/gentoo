@@ -13,7 +13,6 @@
 # wget https://github.com/johan-jansson/gentoo/grub             # grub main config: /etc/default/grub
 
 source /etc/profile
-export PS1="chroot $PS1"
 mount /dev/nvme0n1p1 /boot
 emerge --sync
 emerge -uDN @world
