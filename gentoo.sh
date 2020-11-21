@@ -39,5 +39,6 @@ mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
-cp /root/gentoo-main/chroot.sh /mnt/gentoo/
-chroot /mnt/gentoo /bin/bash
+cp /root/gentoo-main/chroot.sh /mnt/gentoo/root/
+cp /root/gentoo.main/config /mnt/gentoo/root/
+chroot /mnt/gentoo /bin/bash /mnt/gentoo/root/./chroot.sh
