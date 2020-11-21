@@ -7,9 +7,8 @@
 # gentoo.sh        # main script
 # chroot.sh        # chroot operations
 # make.conf        # portage config: /etc/portage/make.conf
-# .config          # kernel config: /usr/src/linux/.config
+# config          # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
-# grub             # grub main config: /etc/default/grub
 
 parted /dev/nvme0n1 mklabel gpt
 parted /dev/nvme0n1 unit mib
