@@ -9,7 +9,6 @@
 # make.conf        # portage config: /etc/portage/make.conf
 # .config          # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
-# grub             # grub main config: /etc/default/grub
 
 source /etc/profile
 emerge --sync
