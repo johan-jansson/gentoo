@@ -11,16 +11,21 @@
 # fstab            # file system table: /etc/fstab
 # post.sh          # post-installation script
 
-doas emerge sys-apps/dbus elogind
-doas rc-update add dbus default
-doas rc-update add elogind boot
-doas rc-update add elogind default
-doas rc-service elogind start
-doas emerge xorg-server xorg-drivers xrandr setxkbmap
-doas emerge dwm st dmenu
-mkdir ~/scripts/
-!!cp startdwm ~/scripts/
-chmod +x ~/scripts/startdwm
-!!cp xinitrc ~/.xinitrc
+# new version (minimal xorg
+doas emerge x11-libs/libX11 x11-base/xorg-server x11-libs/libXrandr x11-libs/libXinerama x11-libs/libXft x11-apps/xinit x11-apps/xrdb x11-apps/mesa-progs x11-apps/xrandr x11-misc/unclutter x11-misc/xclip x11-misc/pcmanfm
+#doas emerge x11-drivers/xf86-video-vboxvideo # for virtualbox
 
-startx
+# old version
+#doas emerge sys-apps/dbus elogind
+#doas rc-update add dbus default
+#doas rc-update add elogind boot
+#doas rc-update add elogind default
+#doas rc-service elogind start
+#doas emerge xorg-server xorg-drivers xrandr setxkbmap
+#doas emerge dwm st dmenu
+#mkdir ~/scripts/
+#!!cp startdwm ~/scripts/
+#chmod +x ~/scripts/startdwm
+#!!cp xinitrc ~/.xinitrc
+#
+#startx
