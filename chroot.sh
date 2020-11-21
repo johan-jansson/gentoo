@@ -46,6 +46,10 @@ sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
 # minimal xorg
+emerge sys-apps/dbus                    # dependency for elogind to work
+emerge sys-auth/elogind                 # required to run xorg as a non-root user
+rc-update add dbus default              # start dbus at boot
+rc-update add elogind default           # start elogind at boot
 emerge x11-libs/libX11                  # xlib library, for application interactions with x-server
 emerge x11-base/xorg-server             # xorg server
 emerge x11-libs/libXft                  # proper font rendering
@@ -73,12 +77,7 @@ passwd -d root
 exit
 
 # old version
-#doas emerge sys-apps/dbus elogind
-#doas rc-update add dbus default
 #doas rc-update add elogind boot
-#doas rc-update add elogind default
-#doas rc-service elogind start
-#doas emerge xorg-server xorg-drivers xrandr setxkbmap
 #doas emerge dwm st dmenu
 #mkdir ~/scripts/
 #!!cp startdwm ~/scripts/
