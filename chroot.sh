@@ -63,8 +63,8 @@ emerge x11-misc/xclip                   # clipboard communication between termin
 emerge x11-apps/setxkbmap               # allows changing of keyboard layout in x
 emerge x11-drivers/xf86-video-vboxvideo # video card drivers (virtualbox)
 # minimal productivity
-emerge git 
-emerge neovim
+emerge dev-vcs/git
+emerge app-editors/neovim
 
 emerge --depclean
 rm /stage3*
