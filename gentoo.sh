@@ -27,7 +27,7 @@ chmod 0600 /mnt/gentoo/swap
 mkswap /mnt/gentoo/swap
 cd /mnt/gentoo
 wget ftp://mirror.mdfnet.se/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-2020*tar.xz
-tar xpf *.tar.xz --xattrs-include='*.*' --numeric-owner
+tar xpfv *.tar.xz --xattrs-include='*.*' --numeric-owner
 mv /mnt/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/make.conf.BAK
 cp /root/gentoo-main/make.conf /mnt/gentoo/etc/portage/make.conf
 mkdir -p /mnt/gentoo/etc/portage/repos.conf
