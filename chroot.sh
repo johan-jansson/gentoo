@@ -23,29 +23,21 @@ eselect locale set 4
 source /etc/profile
 env-update
 sed -i 's/keymap="us"/keymap="sv-latin1"/' /etc/conf.d/keymaps
-
-# BUILD LINUX KERNEL
 emerge -qv sys-kernel/gentoo-sources sys-kernel/linux-firmware app-arch/lz4
-cp /root/.config /usr/src/linux/config
+cp /root/config /usr/src/linux/.config
 cd /usr/src/linux
-make oldconfig
 make && make install
-
-# NETWORK CONFIG
 echo "hostname=\"mercury\"" > /etc/conf.d/hostname
 echo "dns_domain_lo=\"lind\"" > /etc/conf.d/net
 echo "config_enp0s3=\"dhcp\"" >> /etc/conf.d/net
 emerge -qv --noreplace net-misc/netifrc
-cd /etc/init.d
-ln -s net.lo net.enp0s3 
+ln -s /etc/init.d/net.lo /etc/init.d/net.enp0s3 
 rc-update add net.enp0s3 default
 echo "127.0.0.1 mercury.lind mercury localhost" > /etc/hosts
-emerge net-misc/dhcpcd
-
-# SYSTEM TOOLS
-emerge app-admin/sysklogd
+emerge -qv net-misc/dhcpcd
+emerge -qv app-admin/sysklogd
 rc-update add sysklogd default
-emerge sys-process/cronie
+emerge -qv sys-process/cronie
 rc-update add cronie default
 
 # PARTITION TABLE
