@@ -46,12 +46,8 @@ sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
 # minimal xorg
-emerge sys-apps/dbus                    # dependency for elogind to work
-emerge sys-auth/elogind                 # required to run xorg as a non-root user
-rc-update add dbus default              # start dbus at boot
-rc-update add elogind default           # start elogind at boot
-emerge x11-libs/libX11                  # xlib library, for application interactions with x-server
 emerge x11-base/xorg-server             # xorg server
+emerge x11-libs/libX11                  # xlib library, for application interactions with x-server
 emerge x11-libs/libXft                  # proper font rendering
 emerge x11-apps/xrandr                  # convenient resolution/bit depth changes (not just via xorg.conf)
 emerge x11-libs/libXrandr               # associated xrandr libraries
@@ -62,6 +58,10 @@ emerge x11-apps/mesa-progs              # open source implementation of opengl
 emerge x11-misc/xclip                   # clipboard communication between terminals and x
 emerge x11-apps/setxkbmap               # allows changing of keyboard layout in x
 emerge x11-drivers/xf86-video-vboxvideo # video card drivers (virtualbox)
+emerge sys-apps/dbus                    # dependency for elogind to work
+emerge sys-auth/elogind                 # required to run xorg as a non-root user
+rc-update add dbus default              # start dbus at boot
+rc-update add elogind default           # start elogind at boot
 # minimal productivity
 emerge dev-vcs/git
 emerge app-editors/neovim
