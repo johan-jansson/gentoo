@@ -9,7 +9,6 @@
 # make.conf        # portage config: /etc/portage/make.conf
 # config           # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
-# post.sh          # post-installation script
 
 source /etc/profile
 emerge --sync
@@ -34,17 +33,36 @@ emerge --noreplace net-misc/netifrc
 ln -s /etc/init.d/net.lo /etc/init.d/net.enp0s3 
 rc-update add net.enp0s3 default
 echo "127.0.0.1 mercury.lind mercury localhost" > /etc/hosts
-emerge net-misc/dhcpcd
-emerge app-admin/sysklogd
+emerge net-misc/dhcpcd      # dhcp client
+emerge app-admin/sysklogd   # syslogger
+emerge sys-process/cronie   # cron daemon
 rc-update add sysklogd default
-emerge sys-process/cronie
 rc-update add cronie default
 mv /root/fstab /etc/fstab
-emerge sys-boot/grub:2
+emerge sys-boot/grub:2      # boot loader
 grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
 sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
+
+# minimal xorg
+emerge x11-libs/libX11                  # xlib library, for application interactions with x-server
+emerge x11-base/xorg-server             # xorg server
+emerge x11-libs/libXft                  # proper font rendering
+emerge x11-apps/xrandr                  # convenient resolution/bit depth changes (not just via xorg.conf)
+emerge x11-libs/libXrandr               # associated xrandr libraries
+emerge x11-libs/libXinerama             # multi-monitor support
+emerge x11-apps/xinit                   # startx script (maybe not necessary if using login manager)
+emerge x11-apps/xrdb                    # allows reading from xresources file, ex for terminal coloring
+emerge x11-apps/mesa-progs              # open source implementation of opengl
+emerge x11-misc/xclip                   # clipboard communication between terminals and x
+emerge x11-apps/setxkbmap               # allows changing of keyboard layout in x
+emerge x11-drivers/xf86-video-vboxvideo # video card drivers (virtualbox)
+# minimal productivity
+emerge git 
+emerge neovim
+
+emerge --depclean
 rm /stage3*
 emerge doas
 echo "permit :wheel" > /etc/doas.conf
@@ -53,3 +71,18 @@ passwd johan
 passwd -d root
 
 exit
+
+# old version
+#doas emerge sys-apps/dbus elogind
+#doas rc-update add dbus default
+#doas rc-update add elogind boot
+#doas rc-update add elogind default
+#doas rc-service elogind start
+#doas emerge xorg-server xorg-drivers xrandr setxkbmap
+#doas emerge dwm st dmenu
+#mkdir ~/scripts/
+#!!cp startdwm ~/scripts/
+#chmod +x ~/scripts/startdwm
+#!!cp xinitrc ~/.xinitrc
+#
+#startx
