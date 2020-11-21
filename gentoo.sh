@@ -2,14 +2,14 @@
 # Gentoo installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
 # Based on https://wiki.gentoo.org/wiki/Handbook:AMD64
 # Boot: install-amd64-minimal-*.iso
-#
-# wget https://github.com/johan-jansson/gentoo/install.sh       # this script
-# wget https://github.com/johan-jansson/gentoo/make.conf        # portage config: /etc/portage/make.conf
-# wget https://github.com/johan-jansson/gentoo/.config          # kernel config: /usr/src/linux/.config
-# wget https://github.com/johan-jansson/gentoo/fstab            # file system table: /etc/fstab
-# wget https://github.com/johan-jansson/gentoo/grub             # grub main config: /etc/default/grub
-#
 # wget https://github.com/johan-jansson/gentoo/archive/main.zip
+#
+# gentoo.sh        # main script
+# chroot.sh        # chroot operations
+# make.conf        # portage config: /etc/portage/make.conf
+# .config          # kernel config: /usr/src/linux/.config
+# fstab            # file system table: /etc/fstab
+# grub             # grub main config: /etc/default/grub
 
 parted /dev/nvme0n1 mklabel gpt
 parted /dev/nvme0n1 unit mib
