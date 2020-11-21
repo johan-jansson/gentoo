@@ -12,7 +12,7 @@
 # post.sh          # post-installation script
 
 # new version (minimal xorg
-doas emerge x11-libs/libX11 x11-base/xorg-server x11-libs/libXrandr x11-libs/libXinerama x11-libs/libXft x11-apps/xinit x11-apps/xrdb x11-apps/mesa-progs x11-apps/xrandr x11-misc/unclutter x11-misc/xclip
+doas emerge x11-libs/libX11 x11-base/xorg-server x11-libs/libXrandr x11-libs/libXinerama x11-libs/libXft x11-apps/xinit x11-apps/xrdb x11-apps/mesa-progs x11-apps/xrandr x11-misc/xclip
 doas emerge x11-drivers/xf86-video-vboxvideo # for virtualbox
 doas git 
 
