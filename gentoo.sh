@@ -9,7 +9,6 @@
 # make.conf        # portage config: /etc/portage/make.conf
 # config           # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
-# post.sh          # post-installation script
 
 parted /dev/nvme0n1 mklabel gpt
 parted /dev/nvme0n1 unit mib
