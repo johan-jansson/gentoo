@@ -2,7 +2,7 @@
 # Gentoo installation script, optimized for AMD Ryzen 9 3900X with Zen 2 architecture (24 threads) 
 # Based on https://wiki.gentoo.org/wiki/Handbook:AMD64
 # Boot: install-amd64-minimal-*.iso
-# wget https://github.com/johan-jansson/gentoo/archive/main.zip
+# wget https://github.com/johan-jansson/gentoo/archive/virtualbox.zip
 #
 # gentoo.sh        # main script
 # chroot.sh        # chroot operations
