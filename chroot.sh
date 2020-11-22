@@ -72,7 +72,9 @@ rm /stage3*
 emerge doas
 echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
-echo "exec dbus-launch --sh-syntax --exit-with-session dwm" > /home/johan/.xinitrc
+echo "setxkbmap se" > /home/johan/.xinitrc
+echo "xrandr --output Virtual1 --mode 1920x1440" >> /home/johan/.xinitrc
+echo "exec dbus-launch --sh-syntax --exit-with-session dwm" >> /home/johan/.xinitrc
 passwd johan
 passwd -d root
 
