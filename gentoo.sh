@@ -10,18 +10,18 @@
 # config           # kernel config: /usr/src/linux/.config
 # fstab            # file system table: /etc/fstab
 
-parted /dev/nvme0n1 mklabel gpt
-parted /dev/nvme0n1 unit mib
-parted /dev/nvme0n1 mkpart primary 1 512 # 512 Mb /boot
-parted /dev/nvme0n1 name 1 EFI
-parted /dev/nvme0n1 set 1 boot on
-parted /dev/nvme0n1 mkpart primary 513 100% # Remaining /
-parted /dev/nvme0n1 name 2 rootfs
-mkfs.vfat /dev/nvme0n1p1
-mkfs.ext4 /dev/nvme0n1p2
-mount /dev/nvme0n1p2 /mnt/gentoo
+parted /dev/nvme1n1 mklabel gpt
+parted /dev/nvme1n1 unit mib
+parted /dev/nvme1n1 mkpart primary 1 512 # 512 Mb /boot
+parted /dev/nvme1n1 name 1 EFI
+parted /dev/nvme1n1 set 1 boot on
+parted /dev/nvme1n1 mkpart primary 513 100% # Remaining /
+parted /dev/nvme1n1 name 2 rootfs
+mkfs.vfat /dev/nvme1n1p1
+mkfs.ext4 /dev/nvme1n1p2
+mount /dev/nvme1n1p2 /mnt/gentoo
 mkdir /mnt/gentoo/boot
-mount /dev/nvme0n1p1 /mnt/gentoo/boot
+mount /dev/nvme1n1p1 /mnt/gentoo/boot
 dd if=/dev/zero of=/mnt/gentoo/swap bs=1024 count=33554432 # 32 Gb /swap
 chmod 0600 /mnt/gentoo/swap
 mkswap /mnt/gentoo/swap
