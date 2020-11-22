@@ -66,13 +66,13 @@ rc-update add elogind default           # start elogind at boot
 emerge dev-vcs/git                      # git client
 emerge app-editors/neovim               # neovim editor
 emerge dwm st dmenu                     # basic dwm, st, dmenu xorg environment
-echo "exec dbus-launch --sh-syntax --exit-with-session dwm" > /home/johan/.xinitrc
 
 emerge --depclean
 rm /stage3*
 emerge doas
 echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
+echo "exec dbus-launch --sh-syntax --exit-with-session dwm" > /home/johan/.xinitrc
 passwd johan
 passwd -d root
 
