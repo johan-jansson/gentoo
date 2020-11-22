@@ -57,14 +57,16 @@ emerge x11-apps/xrdb                    # allows reading from xresources file, e
 emerge x11-apps/mesa-progs              # open source implementation of opengl
 emerge x11-misc/xclip                   # clipboard communication between terminals and x
 emerge x11-apps/setxkbmap               # allows changing of keyboard layout in x
-emerge x11-drivers/xf86-video-vboxvideo # video card drivers (virtualbox)
+emerge x11-drivers/xf86-video-nouveau   # video card drivers
 emerge sys-apps/dbus                    # dependency for elogind to work
 emerge sys-auth/elogind                 # required to run xorg as a non-root user
 rc-update add dbus default              # start dbus at boot
 rc-update add elogind default           # start elogind at boot
 # minimal productivity
-emerge dev-vcs/git
-emerge app-editors/neovim
+emerge dev-vcs/git                      # git client
+emerge app-editors/neovim               # neovim editor
+emerge dwm st dmenu                     # basic dwm, st, dmenu xorg environment
+echo "exec dbus-launch --sh-syntax --exit-with-session dwm" > /home/johan/.xinitrc
 
 emerge --depclean
 rm /stage3*
@@ -75,13 +77,3 @@ passwd johan
 passwd -d root
 
 exit
-
-# old version
-#doas rc-update add elogind boot
-#doas emerge dwm st dmenu
-#mkdir ~/scripts/
-#!!cp startdwm ~/scripts/
-#chmod +x ~/scripts/startdwm
-#!!cp xinitrc ~/.xinitrc
-#
-#startx
