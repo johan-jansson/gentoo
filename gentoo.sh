@@ -28,7 +28,7 @@ mkswap /mnt/gentoo/swap
 cd /mnt/gentoo
 wget ftp://mirror.mdfnet.se/gentoo/releases/amd64/autobuilds/current-stage3-amd64/stage3-amd64-2020*tar.xz
 tar xpf *.tar.xz --xattrs-include='*.*' --numeric-owner
-/bin/cp /root/gentoo-main/make.conf /mnt/gentoo/etc/portage/make.conf
+/bin/cp /root/gentoo-virtualbox/make.conf /mnt/gentoo/etc/portage/make.conf
 mkdir -p /mnt/gentoo/etc/portage/repos.conf
 cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
@@ -37,9 +37,9 @@ mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
-cp /root/gentoo-main/chroot.sh /mnt/gentoo/root/
-cp /root/gentoo-main/config /mnt/gentoo/root/
-cp /root/gentoo-main/fstab /mnt/gentoo/root/
+cp /root/gentoo-virtualbox/chroot.sh /mnt/gentoo/root/
+cp /root/gentoo-virtualbox/config /mnt/gentoo/root/
+cp /root/gentoo-virtualbox/fstab /mnt/gentoo/root/
 chmod +x /mnt/gentoo/root/chroot.sh
 chroot /mnt/gentoo /root/chroot.sh
 
