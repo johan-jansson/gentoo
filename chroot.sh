@@ -42,7 +42,7 @@ mv /root/fstab /etc/fstab
 emerge sys-boot/grub:2      # boot loader
 grub-install --target=x86_64-efi --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1280x1024x32/' /etc/default/grub
+sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=2560x1440x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
 #minimal xorg
