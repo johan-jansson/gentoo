@@ -1,9 +1,10 @@
 # gentoo automatic installation script
 
-1. boot the live cd and wget the repo
-2. run ./gentoo.sh
+1. boot the live cd
+2. wget https://github.com/johan-jansson/gentoo/archive/main.zip
+3. run ./gentoo.sh
 
 take a walk...
 
-3. choose password
-4. profit
+4. choose password
+5. profit
