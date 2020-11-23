@@ -64,7 +64,7 @@ rc-update add dbus default              # start dbus at boot
 rc-update add elogind default           # start elogind at boot
 
 # user config
-emerge git doas
+emerge dev-vcs/git doas
 echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
 passwd johan
