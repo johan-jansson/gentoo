@@ -45,7 +45,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1920x1080x32/' /etc/default/grub
 sed -i 's/#GRUB_GFXPAYLOAD_LINUX=/GRUB_GFXPAYLOAD_LINUX=keep/' /etc/default/grub
 
-#minimal xorg
+# minimal xorg
 emerge x11-base/xorg-server             # xorg server
 emerge x11-libs/libX11                  # xlib library, for application interactions with x-server
 emerge x11-libs/libXft                  # proper font rendering
@@ -63,13 +63,19 @@ emerge sys-auth/elogind                 # required to run xorg as a non-root use
 rc-update add dbus default              # start dbus at boot
 rc-update add elogind default           # start elogind at boot
 
-# clean up
-emerge --depclean
-rm /stage3*
+# user config
 emerge doas
 echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
 passwd johan
 passwd -d root
+
+###############################################################
+######################## autorice here ########################
+###############################################################
+
+# clean up
+emerge --depclean
+rm /stage3*
 
 exit
