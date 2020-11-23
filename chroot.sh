@@ -62,20 +62,20 @@ emerge sys-apps/dbus                    # dependency for elogind to work
 emerge sys-auth/elogind                 # required to run xorg as a non-root user
 rc-update add dbus default              # start dbus at boot
 rc-update add elogind default           # start elogind at boot
-# minimal productivity
-emerge dev-vcs/git                      # git client
-emerge app-editors/neovim               # neovim editor
-emerge dwm st dmenu                     # basic dwm, st, dmenu xorg environment
 
-emerge --depclean
-rm /stage3*
+# user config
 emerge doas
 echo "permit :wheel" > /etc/doas.conf
 useradd -m -G users,wheel,audio,video,input johan
-echo "setxkbmap se" > /home/johan/.xinitrc
-echo "xrandr --output Virtual-1 --mode 1920x1440" >> /home/johan/.xinitrc
-echo "exec dbus-launch --sh-syntax --exit-with-session dwm" >> /home/johan/.xinitrc
 passwd johan
 passwd -d root
+
+###############################################################
+######################## autorice here ########################
+###############################################################
+
+# clean up
+emerge --depclean
+rm /stage3*
 
 exit
